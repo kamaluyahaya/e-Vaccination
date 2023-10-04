@@ -136,7 +136,7 @@ class _PrescriptionRecState extends State<PrescriptionRec> {
                 width: 20,
               ),
               Text(
-                "M-Prescription system",
+                "Vaccination Record",
                 style: TextStyle(color: kBlue, fontSize: 17),
               ),
             ],
@@ -230,7 +230,7 @@ class _PrescriptionRecState extends State<PrescriptionRec> {
                             ],
                           ),
                         )
-                      : Center(child: Text("No Prescription Records"));
+                      : Center(child: Text("No Vaccination Records"));
                 }
               }),
         ),

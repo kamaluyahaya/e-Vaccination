@@ -12,7 +12,7 @@ class DefaultAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        "M-Prescription system",
+        "eVaccination App",
         style: TextStyle(
             fontSize: 20, color: kDefault, fontWeight: FontWeight.w600),
       ),

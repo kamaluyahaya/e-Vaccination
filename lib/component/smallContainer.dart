@@ -16,7 +16,7 @@ class SmallContainer extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 80,
+        height: 70,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: Color.fromARGB(255, 235, 235, 235),
@@ -36,9 +36,15 @@ class SmallContainer extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(
-                    icon,
-                    color: kDefault,
+                  Container(
+                    height: 50,
+                    width: 40,
+                    decoration:
+                        BoxDecoration(color: Color.fromARGB(141, 4, 137, 154)),
+                    child: Icon(
+                      icon,
+                      color: kWhite,
+                    ),
                   ),
                   SizedBox(
                     width: 15,

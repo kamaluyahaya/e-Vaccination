@@ -23,7 +23,7 @@ class Inputs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey[100],
+      // color: Colors.grey[100],
       child: Column(
         children: [
           Padding(

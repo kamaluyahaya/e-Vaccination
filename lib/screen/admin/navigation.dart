@@ -69,14 +69,14 @@ class _NavigationState extends State<Navigation> {
   }
 }
 
-class Prescriber_nav extends StatefulWidget {
-  const Prescriber_nav({Key? key}) : super(key: key);
+class AdminNav extends StatefulWidget {
+  const AdminNav({Key? key}) : super(key: key);
 
   @override
-  State<Prescriber_nav> createState() => _Prescriber_navState();
+  State<AdminNav> createState() => _AdminNavState();
 }
 
-class _Prescriber_navState extends State<Prescriber_nav> {
+class _AdminNavState extends State<AdminNav> {
   List<Widget> _option = [
     DoubleClick(child: PrescriberDash()),
     DoubleClick(child: PrescriptionRec(true)),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../constant/constant.dart';
 
 class DefaultButton extends StatelessWidget {
-  final color, title, onPress;
-  DefaultButton({super.key, this.color, this.title, this.onPress});
+  final color, title, onPress, icon;
+  DefaultButton({super.key, this.color, this.title, this.onPress, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class DefaultButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.login_outlined,
+                  icon,
                   size: 14,
                   color: kWhite,
                 ),

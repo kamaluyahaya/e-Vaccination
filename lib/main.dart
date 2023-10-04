@@ -13,25 +13,27 @@ void main() {
   runApp(const MyApp());
 }
 
+final TextStyle myTextStyle = TextStyle(fontSize: 10.0);
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final ThemeData myTheme = ThemeData(
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(fontSize: 10),
+        bodySmall: TextStyle(fontSize: 14),
+        bodyMedium: TextStyle(fontSize: 12),
+      ),
+      primarySwatch: Colors.blue,
+      fontFamily: "Regular",
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'M-Prescription',
-      theme: ThemeData(
-        textTheme: TextTheme(
-          bodyText1: TextStyle(fontSize: 12.0),
-          bodyText2: TextStyle(fontSize: 12.0),
-          headline1: TextStyle(fontSize: 20.0),
-          // add more styles as needed
-        ),
-        primarySwatch: Colors.blue,
-        fontFamily: "Regular",
-      ),
+      title: 'eVaccination',
+      theme: myTheme,
       home: AnimatedSplashScreen(
         splash: Splash(),
         splashIconSize: 800.0,

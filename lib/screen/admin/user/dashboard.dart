@@ -18,14 +18,8 @@ import 'package:evaccinations/screen/admin/profile.dart';
 import 'package:evaccinations/screen/admin/staff-record.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
-import '../../component/myContainer.dart';
-import '../../menu.dart';
-import 'add-vaccination.dart';
-import 'addPatient.dart';
-import 'prescription-record.dart';
-import 'records.dart';
-import 'retreive.dart';
-import 'user/user-login.dart';
+import '../prescription-record.dart';
+import '../records.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -256,8 +250,8 @@ class _PrescriberDashState extends State<PrescriberDash> {
     Widget okBtn = TextButton(
       onPressed: () {
         Navigator.of(context).pop('dialog');
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => UserLogin()));
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       },
       child: Text("Yes"),
     );
@@ -430,7 +424,7 @@ class _PrescriberDashState extends State<PrescriberDash> {
                               : prescriptionList[0]['count(*)'],
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => AddVaccination()));
+                                builder: (context) => PrescriptionRec(false)));
                           },
                           txt: "Add Vaccination",
                           icon: Icons.medication,
@@ -466,198 +460,6 @@ class _PrescriberDashState extends State<PrescriberDash> {
                           onTap: () => showAlertDialog(context),
                           txt: "Log out",
                           icon: Icons.logout_outlined,
-                        ),
-                        sizedBox,
-                        Container(
-                            color: Color.fromARGB(255, 242, 248, 252),
-                            height: 100,
-                            width: MediaQuery.of(context).size.height,
-                            child: Center(
-                                child: Text("Today's date $formattedDate"))),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ));
-  }
-}
-
-class RecordOfficerDash extends StatefulWidget {
-  const RecordOfficerDash({Key? key}) : super(key: key);
-
-  @override
-  State<RecordOfficerDash> createState() => _RecordOfficerDashState();
-}
-
-class _RecordOfficerDashState extends State<RecordOfficerDash> {
-  showAlertDialog(
-    BuildContext context,
-  ) {
-    Widget okBtn = TextButton(
-      onPressed: () {
-        Navigator.of(context).pop('dialog');
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) => Menu()));
-      },
-      child: Text("Yes"),
-    );
-
-    Widget noBtn = TextButton(
-      onPressed: () {
-        Navigator.of(context).pop('dialog');
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (context) => CleanerRecord()));
-      },
-      child: Text("No"),
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: Text("Status"),
-      content: Text("Confirm if you want to exist?"),
-      actions: [
-        okBtn,
-        noBtn,
-      ],
-    );
-
-    //show the dialog alert
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
-  }
-
-  var now, formattedDate;
-  dateUpdate() {
-    now = new DateTime.now();
-    var formatter = DateFormat.yMMMMd('en_US');
-    formattedDate = formatter.format(now);
-  }
-
-  String? name;
-  profile() async {
-    SharedPreferences pred = await SharedPreferences.getInstance();
-    setState(() {
-      name = pred.getString("name");
-    });
-  }
-
-  List patientList = [];
-  List prescriptionList = [];
-  Future<List> getUserData() async {
-    try {
-      var res = await http.post(Uri.parse(myurl), body: {
-        "request": "COUNT ALL PATIENT",
-      });
-
-      setState(() {
-        patientList = jsonDecode(res.body);
-      });
-    } catch (e) {
-      print(e);
-    }
-    return patientList;
-  }
-
-  Future<List> prescribe() async {
-    try {
-      var res = await http.post(Uri.parse(myurl), body: {
-        "request": "COUNT ALL PRESCRIPTION",
-      });
-
-      setState(() {
-        prescriptionList = jsonDecode(res.body);
-      });
-    } catch (e) {
-      print(e);
-    }
-    return prescriptionList;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    profile();
-    getUserData();
-    prescribe();
-    dateUpdate();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: kWhite,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: kWhite,
-          title: DefaultAppBar(
-            txt: "$name",
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Container(
-              // height: 500,
-              color: Color.fromARGB(255, 248, 247, 247),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "img/officer1.jpg",
-                          width: 200,
-                        ),
-                        //
-                        sizedBox,
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "DASHBOARD",
-                            style: TextStyle(
-                                color: kDefault,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        ),
-                        SmallContainer(
-                          status: "true",
-                          numbers: patientList.isEmpty
-                              ? "0"
-                              : patientList[0]['count(*)'],
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Add_Patient()));
-                          },
-                          txt: "Register patient",
-                          icon: Icons.person_add_alt_1_outlined,
-                        ),
-                        sizedBox,
-                        SmallContainer(
-                          status: "true",
-                          numbers: prescriptionList.isEmpty
-                              ? "0"
-                              : patientList[0]['count(*)'],
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Retrieve()));
-                          },
-                          txt: "Send prescription",
-                          icon: Icons.person_add_alt_1_outlined,
-                        ),
-                        sizedBox,
-                        SmallContainer(
-                          onTap: () => showAlertDialog(context),
-                          txt: "Log out",
-                          icon: Icons.person_add_alt_1_outlined,
                         ),
                         sizedBox,
                         Container(

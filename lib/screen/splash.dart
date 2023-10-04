@@ -26,10 +26,10 @@ class Splash extends StatelessWidget {
                   baseColor: Color.fromARGB(255, 169, 25, 15),
                   highlightColor: Color.fromARGB(255, 238, 223, 87),
                   child: Text(
-                    'e-Vaccination System',
+                    'e-Vaccination Management System',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 22.0,
+                      fontSize: 20.0,
                       fontFamily: "Bold",
                       fontWeight: FontWeight.bold,
                     ),
@@ -56,11 +56,11 @@ class Splash extends StatelessWidget {
                   ),
                 ],
               ),
-              sizedBox,
+              // sizedBox,
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "Design By ADAM",
+                  "Design By Adamu Said Alkasim - KASU/18/CSC/1006",
                   style: TextStyle(
                       fontSize: 15, fontFamily: "Bold", color: kDefault),
                 ),
